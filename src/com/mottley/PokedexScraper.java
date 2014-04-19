@@ -89,38 +89,60 @@ public class PokedexScraper {
                         writer.append(splitResult[1].trim().replace("#", "") + ", ");
                         writer.append(splitResult[0].trim() + ", ");
                     }
-                    else if (result.contains("National"))
+                    else if (result.contains("<b>National"))
                     {
-                        result = result.substring(107);
+                        result = result.substring(109);
                         result = result.replace("</td></tr>", "");
                         writer.append(result.trim().replace("#", "") + ", ");
-                    }
-                    else if (result.contains("<tr><td colspan=\"2\" width=\"14%\" class=\"fooinfo\">Base Stats")) 
-                    {
-                        for (int i = 0; i < 6; i++) 
-                        {
-                            // Parsing base stats
-                            result = scanner.nextLine();
-                            result = result.replace("<td align=\"center\" class=\"fooinfo\">", "");
-                            result = result.replace("</td>", "");
-                            if (i == 5) 
-                            {
-                                result = result.replace("</tr>", "");
-                            }
-                            writer.append(result);
-                            if (i < 5) 
-                            {
-                                // If not last stat, add a ',' to CSV
-                                writer.append(", ");
-                            } else if (i == 5) 
-                            {
-                                // If last stat, go to new line
-                                writer.append("\n");
-                            }
-                        }
                         writer.flush();
-                        break;
                     }
+                    else if (result.contains("<b>Central Kalos"))
+                    {
+                        result = result.substring(42);
+                        result = result.replace("</td></tr>", "");
+                        writer.append(result.trim().replace("#", "") + ", ");
+                        writer.flush();
+                    }
+                    else if (result.contains("<b>Coastal Kalos"))
+                    {
+                        result = result.substring(42);
+                        result = result.replace("</td></tr>", "");
+                        writer.append(result.trim().replace("#", "") + ", ");
+                        writer.flush();
+                    }
+                    else if (result.contains("<b>Mountain Kalos"))
+                    {
+                        result = result.substring(43);
+                        result = result.replace("</td></tr>", "");
+                        writer.append(result.trim().replace("#", "") + ", ");
+                        writer.flush();
+                    }
+//                    else if (result.contains("<tr><td colspan=\"2\" width=\"14%\" class=\"fooinfo\">Base Stats")) 
+//                    {
+//                        for (int i = 0; i < 6; i++) 
+//                        {
+//                            // Parsing base stats
+//                            result = scanner.nextLine();
+//                            result = result.replace("<td align=\"center\" class=\"fooinfo\">", "");
+//                            result = result.replace("</td>", "");
+//                            if (i == 5) 
+//                            {
+//                                result = result.replace("</tr>", "");
+//                            }
+//                            writer.append(result);
+//                            if (i < 5) 
+//                            {
+//                                // If not last stat, add a ',' to CSV
+//                                writer.append(", ");
+//                            } else if (i == 5) 
+//                            {
+//                                // If last stat, go to new line
+//                                writer.append("\n");
+//                            }
+//                        }
+//                        writer.flush();
+//                        break;
+//                    }
                 }
             } catch (IOException ex) {
                 Logger.getLogger(PokedexScraper.class.getName()).log(Level.SEVERE, null, ex);
